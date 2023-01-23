@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="TRELLO REST APIs using RestAssured and Cucumber" />
         <module name="Trello-API" />
       </profile>
     </annotationProcessing>

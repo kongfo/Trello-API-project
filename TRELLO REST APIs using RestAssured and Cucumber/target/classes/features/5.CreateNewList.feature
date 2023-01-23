@@ -1,3 +1,4 @@
+@test
 Feature:Create a new list
   Scenario:  Authorized memeber can Create a new list
     Given  Create a new list

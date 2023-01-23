@@ -1,3 +1,4 @@
+@test
 Feature: Create a board inside an organization
 
   Scenario: Authorized memeber can create a board inside an organization
