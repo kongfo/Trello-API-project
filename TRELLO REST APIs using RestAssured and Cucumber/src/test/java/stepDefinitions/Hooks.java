@@ -20,7 +20,8 @@ public class Hooks {
     static String listId = "";
     static String boardId = "";
     static String sl = "HTTP/1.1 200 OK";
-    static int sc=200;
+    static int sCode=200;
+    static String sLine ="HTTP/1.1 200 OK";
     static String OrgName = "New Organization 5";
     static String BoardName = "New Board 5";
     static String ListName = "New List 1";
@@ -42,12 +43,13 @@ public class Hooks {
         System.out.println(organizationId);
         response.prettyPrint();
 
+        response.then().statusCode(sCode);
+        response.then().statusLine(sLine);
     }
 
     @Then("Get the organization id and save it in a variable")
     public void getOrganizationId() throws PendingException {
 
-        System.out.println(organizationId);
 
     }
 
@@ -64,14 +66,28 @@ public class Hooks {
         JsonPath path = response.jsonPath();
         memberId = path.getString("id");
         System.out.println(memberId);
-        System.out.println(organizationId);
         response.prettyPrint();
-
+        response.then().statusCode(sCode);
+        response.then().statusLine(sLine);
 
     }
 
     @Then("Get Organizations for a member")
     public void getOrganizations() throws PendingException {
+        RestAssured.baseURI= baseURL;
+        RestAssured.basePath="/1/members/"+memberId+"/organizations";
+        RequestSpecification requestSpecification = RestAssured.given();
+        requestSpecification.queryParam("key",APIKey);
+        requestSpecification.queryParam("token",APIToken);
+        requestSpecification.header("Content-Type","application/json");
+        Response response = requestSpecification.get();
+        System.out.println(organizationId);
+        System.out.println(memberId);
+        response.prettyPrint();
+        response.then().statusCode(sCode);
+        response.then().statusLine(sLine);
+
+
 
     }
 
@@ -93,6 +109,9 @@ public class Hooks {
         System.out.println(organizationId);
 
         response.prettyPrint();
+
+        response.then().statusCode(sCode);
+        response.then().statusLine(sLine);
     }
 
     @Then("Get the board  id and save it in a variable")
